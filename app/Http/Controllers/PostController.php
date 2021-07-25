@@ -11,17 +11,16 @@ class PostController extends Controller
     public function index()
     {
         $post = Post::all();
-        return Response::json(
-            array(
-                'status' => 'success',
-                'post' => $post->toArray(),
-            ),
-            200
-        );
+        $response = $post->toArray();
+
+        return response($response, 200);
     }
 
     public function view(Request $request, $slug)
     {
-        return Post::where('slug', $slug)->first();
+        $post = Post::where('slug', $slug)->first();
+        $response = $post->toArray();
+
+        return response($response, 200);
     }
 }
